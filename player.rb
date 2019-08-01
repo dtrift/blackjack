@@ -4,11 +4,11 @@ class Player
   def initialize(name, money = 100)
     @name = name
     @money = money
-    @current_cards = {}
+    @current_cards = []
   end
 
   def score
-    
+
   end
 
 end
