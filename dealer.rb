@@ -1,8 +1,12 @@
 class Dealer
 
-  def initializa(money = 100)
+  def initialize(money = 100)
     @money = money
     @current_cards = {}
+  end
+
+  def score
+    
   end
 
 end

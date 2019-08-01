@@ -1,3 +1,0 @@
-class DeckOfCards
-  
-end

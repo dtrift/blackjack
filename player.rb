@@ -1,10 +1,14 @@
 class Player
   attr_accessor :name
 
-  def initializa(name, money = 100)
+  def initialize(name, money = 100)
+    @name = name
     @money = money
     @current_cards = {}
-    @name = name
+  end
+
+  def score
+    
   end
 
 end
