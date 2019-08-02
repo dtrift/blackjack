@@ -10,7 +10,7 @@ def welcome
   puts " +   |   |  |      |   |  |   |  |*         |  |   |  |   |  |*     + "
   puts " +   |---   |      |   |  |      |          |  |   |  |      |      + "
   puts " +   |   |  |      |---|  |   |  |*    |    |  |---|  |   |  |*     + "
-  puts " +    ---    ----  |   |   ---   |  *   ----   |   |   ---   |  *   + " 
+  puts " +    ---    ----  |   |   ---   |  *   ----   |   |   ---   |  *   + "
   puts " +                                                                  + "
   puts " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
 end
@@ -18,16 +18,6 @@ end
 deck_first = Deck.new
 welcome
 deck_first.add_item
-puts deck_first.cards
+print deck_first.cards
 puts
-puts "#{deck_first.random_card}"
-puts "#{deck_first.random_card}"
-puts "#{deck_first.random_card}"
-puts "#{deck_first.random_card}"
-puts "#{deck_first.random_card}"
-puts "#{deck_first.random_card}"
-puts "#{deck_first.random_card}"
-puts "#{deck_first.random_card}"
-puts "#{deck_first.random_card}"
-puts "#{deck_first.random_card}"
-
+5.times { puts "#{deck_first.random_card}" }
