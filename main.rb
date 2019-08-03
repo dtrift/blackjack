@@ -26,13 +26,10 @@ def play_game
   puts "Привет #{@player.name}! На твоем счету $#{@player.money}"
   2.times { @player.current_cards << @deck.first_card }
   2.times { @dealer.current_cards << @deck.first_card }
-  puts
-  puts "Карты #{@player.name} #{@player.current_cards}"
-  puts "Карты дилера #{@dealer.current_cards}"
+  @player.show_cards
+  puts "Карты #{@player.name} #{@player.show}"
   @player.score
-  @dealer.score
   puts "Сумма #{@player.name} #{@player.sum_cards}"
-  puts "Сумма дилера #{@dealer.sum_cards}"
 end
 
 @deck = Deck.new
