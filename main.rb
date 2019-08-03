@@ -29,6 +29,10 @@ def play_game
   puts
   puts "Карты #{@player.name} #{@player.current_cards}"
   puts "Карты дилера #{@dealer.current_cards}"
+  @player.score
+  @dealer.score
+  puts "Сумма #{@player.name} #{@player.sum_cards}"
+  puts "Сумма дилера #{@dealer.sum_cards}"
 end
 
 @deck = Deck.new
