@@ -6,7 +6,7 @@ class Deck
     @cards = []
   end
 
-  def add_item
+  def add_cards
 
     ('2'..'9').each do |val|
       @suits.each do |su|
@@ -29,10 +29,13 @@ class Deck
       end
     end
 
+    @cards.shuffle!
+
   end
 
-  def random_card
-    @cards.sample
+  def first_card
+    @cards[0]
+    @cards.shift
   end
 
 end
