@@ -1,5 +1,6 @@
 class Dealer
-  attr_reader :money, :current_cards, :sum_cards, :show
+  attr_accessor :money
+  attr_reader :current_cards, :sum_cards, :show
 
   def initialize(money = 100)
     @money = money
@@ -19,4 +20,7 @@ class Dealer
       @show << card[:card]
     end
   end
+
 end
+
+@dealer = Dealer.new

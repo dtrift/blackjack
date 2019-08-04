@@ -1,6 +1,6 @@
 class Player
-  attr_accessor :name
-  attr_reader :money, :current_cards, :sum_cards, :show
+  attr_accessor :name, :money
+  attr_reader :current_cards, :sum_cards, :show
 
   def initialize(name, money = 100) # метод initialize и score вынести в модуль 
     @name = name
