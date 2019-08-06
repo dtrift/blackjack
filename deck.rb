@@ -41,4 +41,3 @@ class Deck
 end
 
 @deck = Deck.new
-@deck.add_cards
