@@ -3,10 +3,10 @@ class Deck
 
   def initialize
     @suits = ['♡', '♢', '♣', '♠' ]
-    @cards = []
   end
 
   def add_cards
+    @cards = []
 
     ('2'..'9').each do |val|
       @suits.each do |su|
