@@ -1,5 +1,4 @@
 class Deck
-  attr_reader :cards
 
   def initialize
     @suits = ['♡', '♢', '♣', '♠' ]
@@ -8,23 +7,23 @@ class Deck
   def add_cards
     @cards = []
 
-    ('2'..'9').each do |val|
-      @suits.each do |su|
-        card = val, su
-        @cards << {card: card, value: val.to_i}
+    ('2'..'9').each do |value|
+      @suits.each do |suit|
+        card = value, suit
+        @cards << {card: card, value: value.to_i}
       end
     end
 
-    ['10', 'J', 'Q', 'K'].each do |val|
-      @suits.each do |su|
-        card = val, su
+    ['10', 'J', 'Q', 'K'].each do |value|
+      @suits.each do |suit|
+        card = value, suit
         @cards << {card: card, value: 10}
       end
     end
 
-    ['A'].each do |val|
-      @suits.each do |su|
-        card = val, su
+    ['A'].each do |value|
+      @suits.each do |suit|
+        card = value, suit
         @cards << {card: card, value: 11}
       end
     end
