@@ -148,7 +148,7 @@ def one_more_game
 end
   
 def score(gamer)
-  gamer.score_current_cards.sum
+  gamer.score
 end
 
 def result
