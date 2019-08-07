@@ -21,8 +21,8 @@ end
 def get_player_name
   puts "Как тебя зовут?"
   print "Имя: "
-  @name = gets.chomp.capitalize
-  @player = Player.new(@name)
+  name = gets.chomp.capitalize
+  @player = Player.new(name)
   puts "Привет #{@player.name}! На твоем счету $#{@player.money}"
   puts
 end
@@ -30,14 +30,26 @@ end
 def start_new_game
   @deck.add_cards
   @player.current_cards = []
-  @player.score = 0
+  @player.score_current_cards = []
   @dealer.current_cards = []
-  @dealer.score = 0
+  @dealer.score_current_cards = []
   2.times { one_more_card(@player) }
+  blackjack!
   2.times { one_more_card(@dealer) }
   show_player_cards
   put_money_bank
   player_choice
+end
+  
+def blackjack!
+  if score(@player) == 21
+    puts "**************"
+    puts "* BALCKJACK! *"
+    puts "**************"
+    player_win
+    open_cards
+    one_more_game
+  end
 end
 
 def player_choice
@@ -67,7 +79,7 @@ end
 def show_player_cards
   puts
   puts "Карты #{@player.name}: #{@player.current_cards}"
-  puts "Сумма: #{@player.score}"
+  puts "Сумма: #{score(@player)}"
   puts "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-"
   puts "Карты дилера: ************"
   puts "Сумма: **"
@@ -85,7 +97,9 @@ end
 def put_money_bank
   @bank = 0
   @player.money -= 10
+  player_lost && gg if @player.money < 0
   @dealer.money -= 10
+  player_win && gg if @dealer.money < 0
   @bank += 20
   balance_info
 end
@@ -94,22 +108,30 @@ end
 def one_more_card(gamer)
   card = @deck.first_card
   gamer.current_cards << card[:card]
-  gamer.score += card[:value]
+  if card[:value] == 11 && score(gamer) + card[:value] > 21
+    gamer.score_current_cards << 1
+  else
+    gamer.score_current_cards << card[:value]
+  end
 end
 
 def skip
-  one_more_card(@dealer) if @dealer.score <= 17 && @dealer.current_cards.length <= 2
+  one_more_card(@dealer) if score(@dealer) <= 17 && @dealer.current_cards.length <= 2
 end
 
 def open_cards
   puts
   puts "Карты #{@player.name}: #{@player.current_cards}"
-  puts "Сумма: #{@player.score}"
-  puts "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-"
+  puts "Сумма: #{score(@player)}"
+  puts "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-"
   puts "Карты дилера: #{@dealer.current_cards}"
-  puts "Сумма: #{@dealer.score}"
+  puts "Сумма: #{score(@dealer)}"
   puts
   result
+  one_more_game
+end
+  
+def one_more_game
   loop do
     puts "Играем дальше?"
     puts "1. Да"
@@ -120,24 +142,28 @@ def open_cards
     when 1 
       start_new_game
     when 2
-      exit
+      gg
     end
   end
 end
+  
+def score(gamer)
+  gamer.score_current_cards.sum
+end
 
 def result
-  if @player.score < 22 && @dealer.score < 22 &&
-    @player.score > @dealer.score 
+  if score(@player) < 22 && score(@dealer) < 22 &&
+    score(@player) > score(@dealer)
     player_win
   elsif 
-    @player.score < 22 && @dealer.score > 21 
+    score(@player) < 22 && score(@dealer) > 21 
     player_win
   elsif
-    @player.score < 22 && @dealer.score < 22 &&
-    @player.score < @dealer.score
+    score(@player) < 22 && score(@dealer) < 22 &&
+    score(@player) < score(@dealer)
     player_lost
   elsif
-    @player.score > 21 && @dealer.score < 22
+    score(@player) > 21 && score(@dealer) < 22
     player_lost
   else
     draw
@@ -158,6 +184,11 @@ def draw
   puts "Ничья!"
   @player.money += @bank/2
   @dealer.money += @bank/2
+end
+  
+def gg
+  puts "GG BB #{@player.name}!"
+  exit
 end
 
 welcome
