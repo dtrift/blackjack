@@ -4,7 +4,7 @@ class Dealer
   def initialize(money = 100)
     @money = money
     @current_cards = []
-    @score = 0
+    @score_current_cards = []
   end
 
   def score
