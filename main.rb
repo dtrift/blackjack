@@ -34,8 +34,8 @@ def start_new_game
   @dealer.current_cards = []
   @dealer.score_current_cards = []
   2.times { one_more_card(@player) }
-  blackjack!
   2.times { one_more_card(@dealer) }
+  blackjack!
   show_player_cards
   put_money_bank
   player_choice
