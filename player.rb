@@ -8,4 +8,8 @@ class Player
     @score_current_cards = []
   end
 
+  def score
+    @score_current_cards.sum
+  end
+
 end

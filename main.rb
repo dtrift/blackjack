@@ -42,7 +42,7 @@ def start_new_game
 end
   
 def blackjack!
-  if score(@player) == 21
+  if @player.score == 21
     puts "**************"
     puts "* BALCKJACK! *"
     puts "**************"
@@ -79,7 +79,7 @@ end
 def show_player_cards
   puts
   puts "Карты #{@player.name}: #{@player.current_cards}"
-  puts "Сумма: #{score(@player)}"
+  puts "Сумма: #{@player.score}"
   puts "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-"
   puts "Карты дилера: ************"
   puts "Сумма: **"
@@ -116,16 +116,16 @@ def one_more_card(gamer)
 end
 
 def skip
-  one_more_card(@dealer) if score(@dealer) <= 17 && @dealer.current_cards.length <= 2
+  one_more_card(@dealer) if @dealer.score <= 17 && @dealer.current_cards.length <= 2
 end
 
 def open_cards
   puts
   puts "Карты #{@player.name}: #{@player.current_cards}"
-  puts "Сумма: #{score(@player)}"
+  puts "Сумма: #{@player.score}"
   puts "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-"
   puts "Карты дилера: #{@dealer.current_cards}"
-  puts "Сумма: #{score(@dealer)}"
+  puts "Сумма: #{@dealer.score}"
   puts
   result
   one_more_game
@@ -152,18 +152,18 @@ def score(gamer)
 end
 
 def result
-  if score(@player) < 22 && score(@dealer) < 22 &&
-    score(@player) > score(@dealer)
+  if @player.score < 22 && @dealer.score < 22 &&
+    @player.score > @dealer.score
     player_win
   elsif 
-    score(@player) < 22 && score(@dealer) > 21 
+    @player.score < 22 && @dealer.score > 21 
     player_win
   elsif
-    score(@player) < 22 && score(@dealer) < 22 &&
-    score(@player) < score(@dealer)
+    @player.score < 22 && @dealer.score < 22 &&
+    @player.score < @dealer.score
     player_lost
   elsif
-    score(@player) > 21 && score(@dealer) < 22
+    @player.score > 21 && @dealer.score < 22
     player_lost
   else
     draw

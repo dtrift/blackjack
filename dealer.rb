@@ -7,6 +7,10 @@ class Dealer
     @score = 0
   end
 
+  def score
+    @score_current_cards.sum
+  end
+
 end
 
 @dealer = Dealer.new
