@@ -11,10 +11,11 @@ class Game
     @deck = Deck.new
     @dealer = Dealer.new
     @interface = Interface.new
+    @player = Player.new(interface.get_player_name)
   end
 
-  def new_player(player_name)
-    @player = Player.new(player_name)
-  end
+  # def new_player(player_name)
+  #   @player = Player.new(interface.get_player_name)
+  # end
 
 end

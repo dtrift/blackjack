@@ -12,14 +12,15 @@ class Interface
     puts " +                                                                  + "
     puts " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
     puts
-    puts "Lобро пожаловать в игру Blackjack!"
+    puts "Добро пожаловать в игру Blackjack!"
   end
 
   def get_player_name
     puts "Как тебя зовут?"
     print "Имя: "
-    player_name = gets.chomp.capitalize
-    @game.new_player(player_name)
+    gets.chomp.capitalize
+    # player_name = gets.chomp.capitalize
+    # @game.new_player(player_name)
   end
 
 end

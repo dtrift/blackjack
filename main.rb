@@ -7,4 +7,4 @@ require_relative 'game.rb'
 
 @game = Game.new
 @game.interface.welcome
-@game.interface.get_player_name
+# @game.interface.get_player_name
