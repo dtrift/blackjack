@@ -1,3 +1,6 @@
+require_relative 'game.rb'
+require_relative 'player.rb'
+
 class Interface
 
   def welcome
@@ -20,8 +23,6 @@ class Interface
     print "Имя: "
     player_name = gets.chomp.capitalize
     @game.player.name = player_name
-    # player_name = gets.chomp.capitalize
-    # @game.new_player(player_name)
   end
 
 end
