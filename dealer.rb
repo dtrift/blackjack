@@ -12,5 +12,3 @@ class Dealer
   end
 
 end
-
-@dealer = Dealer.new
