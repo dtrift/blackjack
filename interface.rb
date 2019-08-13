@@ -11,9 +11,9 @@ class Interface
   #   @start.game
   # end
 
-  def initialize(game)
-    @game = game
-  end
+  # def initialize(game)
+  #   @game = game
+  # end
 
   def welcome
     puts
@@ -30,11 +30,9 @@ class Interface
     puts "Добро пожаловать в игру Blackjack!"
   end
 
-  def get_player_name
-    puts "Как тебя зовут?"
-    print "Имя: "
-    player_name = gets.chomp.capitalize
-    @game.player.name = player_name
+  def player_name
+    print "Как тебя зовут?: "
+    gets.chomp.capitalize
   end
 
 end

@@ -6,20 +6,25 @@ require_relative 'game.rb'
 require_relative 'start.rb'
 
 class Start
-  attr_accessor :game, :interface
+  attr_accessor :game_interface, :player, :dealer
 
-  def initialize(game, interface)
-    @game = game
-    @interface = interface
-  end
-
-  def new_interface
-
+  def initialize(interface)
+    @game_interface = interface
+    # @game = game
+    @dealer = Dealer.new
+    @player = nil
   end
 
   def new_game
-    @interface.welcome
-    @interface.get_player_name
+    @game_interface.welcome
+    @player = Player.new(game_interface.player_name)
+    # player_name
+    # @game.interface.get_player_name
+  end
+
+  def player_name
+    @player.name
+    # puts @player.name
   end
 
 end
