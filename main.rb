@@ -5,7 +5,8 @@ require_relative 'interface.rb'
 require_relative 'game.rb'
 require_relative 'start.rb'
 
-Start.new(Game.new, Interface.new).new_game
+@start = Start.new(@game = Game.new, @interface = Interface.new(@game))
+@start.new_game
 
 # @interface = Interface.new
 # @game = Game.new

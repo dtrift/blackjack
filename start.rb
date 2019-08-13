@@ -13,6 +13,10 @@ class Start
     @interface = interface
   end
 
+  def new_interface
+
+  end
+
   def new_game
     @interface.welcome
     @interface.get_player_name
