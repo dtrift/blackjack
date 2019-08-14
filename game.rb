@@ -8,28 +8,20 @@ class Game
   attr_accessor :deck, :dealer, :player, :interface
 
   def initialize
-    @interface = Interface.new
     @deck = Deck.new
     @dealer = Dealer.new
     @player = Player.new
+    @interface = Interface.new
   end
-
-  # def start
-  #   @interface.welcome
-  #   set_player_name
-  # end
-
-  # def set_player_name
-  #   @player.name = @interface.get_player_name
-  # end
 
   def new
     @interface.welcome
-    @interface.get_player_name
+    @player.name = @interface.player_name
+    hello
   end
 
-  # def player_name(name)
-  #   @player.name = name
-  # end
+  def hello
+    @interface.say_hello(@player)
+  end
 
 end

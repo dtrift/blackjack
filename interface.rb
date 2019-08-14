@@ -7,15 +7,7 @@ require_relative 'start.rb'
 
 class Interface
 
-  # def game
-  #   @start.game
-  # end
-
-  # def initialize(game)
-  #   @game = game
-  # end
-
-  def welcome
+def welcome
     puts
     puts " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
     puts " +         A♡ K♡                                                    + "
@@ -33,6 +25,10 @@ class Interface
   def player_name
     print "Как тебя зовут?: "
     gets.chomp.capitalize
+  end
+
+  def say_hello(player)
+    puts "Hello #{player.name}"
   end
 
 end
