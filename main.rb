@@ -3,7 +3,6 @@ require_relative 'dealer.rb'
 require_relative 'deck.rb'
 require_relative 'interface.rb'
 require_relative 'game.rb'
-require_relative 'start.rb'
 
 game = Game.new
-game.new
+game.start
