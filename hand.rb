@@ -1,19 +1,22 @@
-require_relative 'card.rb'
-require_relative 'deck.rb'
-
 class Hand
-  attr_accessor :current_cards
+  attr_accessor :current_cards, :score, :show_cards
 
   def initialize
     @current_cards = []
+    @show_cards = []
+    @score = 0
   end
 
   def get_card(card)
     @current_cards << card
+    @show_cards << [card.name, card.suit].join
+    @score += card.value
   end
 
-  def score
-
+  def clear
+    @current_cards = []
+    @show_cards = []
+    @score = 0
   end
 
 end

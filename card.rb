@@ -7,10 +7,11 @@ class Card
              '8': 8, '9': 9, '10': 10,
              'J': 10, 'Q': 10, 'K': 10, 'A': 11 
                                                 }
-  attr_accessor :name, :suit, :value
-  
+
+  attr_reader :name, :suit, :value
+
   def initialize(name, suit, value)
-    @name = name
+    @name = name.to_s
     @suit = suit
     @value = value
   end

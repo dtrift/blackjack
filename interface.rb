@@ -17,6 +17,7 @@ def welcome
     puts " ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ "
     puts
     puts "Добро пожаловать в игру Blackjack!"
+    puts
   end
 
   def player_name
@@ -24,7 +25,14 @@ def welcome
     gets.chomp.capitalize
   end
 
+  def hello(player)
+    puts
+    puts "Привет #{player.name}, твой баланс $#{player.money}"
+    puts "GL HF"
+  end
+
   def player_choice
+    puts
     puts "Следующее действие:"
     puts "1. Пропустить"
     puts "2. Добавить карту"
@@ -48,8 +56,8 @@ def welcome
 
   def show_player_cards(player)
     puts
-    puts "Карты #{player.name}: #{player.hand.current_cards}"
-    # puts "Сумма: #{player.score}"
+    puts "Карты #{player.name}: #{player.hand.show_cards.join(", ")}"
+    puts "Сумма: #{player.hand.score}"
     puts "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-"
     puts "Карты дилера: ************"
     puts "Сумма: **"
@@ -58,11 +66,11 @@ def welcome
 
   def open_cards(player, dealer)
     puts
-    puts "Карты #{player.name}: #{player.current_cards}"
-    puts "Сумма: #{player.score}"
+    puts "Карты #{player.name}: #{player.hand.show_cards.join(", ")}"
+    puts "Сумма: #{player.hand.score}"
     puts "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-"
-    puts "Карты дилера: #{dealer.current_cards}"
-    puts "Сумма: #{dealer.score}"
+    puts "Карты дилера: #{dealer.hand.show_cards.join(", ")}"
+    puts "Сумма: #{dealer.hand.score}"
     puts
   end
 

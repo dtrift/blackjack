@@ -4,42 +4,57 @@ require_relative 'deck.rb'
 require_relative 'interface.rb'
 
 class Game
-  attr_reader :player, :dealer, :interface, :deck
+  attr_reader :player, :dealer, :interface, :deck, :bank
 
   def initialize
     @player = Player.new
     @dealer = Dealer.new
-    @deck = Deck.new
     @interface = Interface.new
     @bank = 0
+  end
+
+  def hello
+    @interface.hello(@player)
   end
 
   def start
     @interface.welcome
     @player.name = @interface.player_name
+    hello
     new_game
   end
 
   def new_game
+    @deck = Deck.new
+    @player.hand.clear
+    @dealer.hand.clear
     put_money_bank
     2.times { one_more_card(@player) }
     2.times { one_more_card(@dealer) }
     blackjack
     show_player_cards
-    @interface.player_choice
     loop do
       case @interface.player_choice
       when 1
         skip
         open_cards
       when 2
-        one_more_card(@player) if @player.current_cards.length <= 2
+        one_more_card(@player)
         skip
         open_cards
       when 3
         open_cards
-      # else
-      #   puts "Выбери 1, 2 или 3"
+      end
+    end
+  end
+
+  def one_more_game
+    loop do 
+      case @interface.one_more_game
+      when 1
+        new_game
+      when 2
+        gg
       end
     end
   end
@@ -54,6 +69,8 @@ class Game
 
   def open_cards
     @interface.open_cards(@player, @dealer)
+    result
+    one_more_game
   end
 
   def player_win
@@ -67,7 +84,7 @@ class Game
   end
 
   def draw
-    @interface.draw(@player)
+    @interface.draw
     @player.money += @bank/2
     @dealer.money += @bank/2
   end
@@ -76,40 +93,16 @@ class Game
     @interface.gg(@player)
   end
 
-  def one_more_game
-    @interface.one_more_game
-
-  end
-
   private
 
   def blackjack
-    # if @player.score == 21
-    #   @interface.blackjack 
-    #   player_win
-    #   open_cards
-    #   one_more_game
-    # end
+    if @player.hand.score == 21
+      @interface.blackjack 
+      player_win
+      open_cards
+      one_more_game
+    end
   end
-
-  # def open_cards
-  #   # result
-  #   # one_more_game
-  # end
-
-  # def start_new_game
-  #   @deck.add_cards
-  #   @player.current_cards = []
-  #   @player.score_current_cards = []
-  #   @dealer.current_cards = []
-  #   @dealer.score_current_cards = []
-  #   2.times { one_more_card(@player) }
-  #   2.times { one_more_card(@dealer) }
-  #   blackjack!
-  #   show_player_cards
-  #   put_money_bank
-  #   player_choice
-  # end
 
   def put_money_bank
     @bank = 0
@@ -121,34 +114,27 @@ class Game
     balance_info
   end
 
-
   def one_more_card(gamer)
-    # card = @deck.first_card
-    gamer.hand.get_card(@deck.first_card)
-    # if card[:value] == 11 && gamer.score + card[:value] > 21
-    #   gamer.score_current_cards << 1
-    # else
-    #   gamer.score_current_cards << card[:value]
-    # end
+    gamer.hand.get_card(@deck.first_card) if gamer.hand.current_cards.length <= 2
   end
 
   def skip
-    one_more_card(@dealer) if @dealer.score <= 17 && @dealer.current_cards.length <= 2
+    one_more_card(@dealer) if @dealer.hand.score <= 17
   end
 
   def result
-    if @player.score < 22 && @dealer.score < 22 &&
-      @player.score > @dealer.score
+    if @player.hand.score < 22 && @dealer.hand.score < 22 &&
+      @player.hand.score > @dealer.hand.score
       player_win
     elsif 
-      @player.score < 22 && @dealer.score > 21 
+      @player.hand.score < 22 && @dealer.hand.score > 21 
       player_win
     elsif
-      @player.score < 22 && @dealer.score < 22 &&
-      @player.score < @dealer.score
-      player_lostels
+      @player.hand.score < 22 && @dealer.hand.score < 22 &&
+      @player.hand.score < @dealer.hand.score
+      player_lost
     elsif
-      @player.score > 21 && @dealer.score < 22
+      @player.hand.score > 21 && @dealer.hand.score < 22
       player_lost
     else
       draw

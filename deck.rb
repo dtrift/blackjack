@@ -1,5 +1,4 @@
 require_relative 'card.rb'
-require_relative 'hand.rb'
 
 class Deck
   attr_accessor :cards
@@ -15,7 +14,6 @@ class Deck
   end
 
   def first_card
-    @cards[0]
     @cards.shift
   end
 
