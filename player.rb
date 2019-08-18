@@ -1,17 +1,17 @@
-class Player
-  attr_accessor :name, :current_cards, :score_current_cards
+require_relative 'hand.rb'
 
-  attr_reader :money
+class Player
+  attr_accessor :name, :money, :hand
 
   def initialize(name = 'Player', money = 100)
     @name = name
     @money = money
-    @current_cards = []
-    @score_current_cards = []
+    @hand = Hand.new
   end
 
-  def score
-    @score_current_cards.sum
-  end
+  # def score
+  #   19
+  #   # @score_current_cards.sum
+  # end
 
 end

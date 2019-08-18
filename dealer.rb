@@ -1,14 +1,15 @@
+require_relative 'hand.rb'
+
 class Dealer
-  attr_accessor :money, :current_cards, :score_current_cards
+  attr_accessor :money, :hand
 
   def initialize(money = 100)
     @money = money
-    @current_cards = []
-    @score_current_cards = []
+    @hand = Hand.new
   end
 
-  def score
-    @score_current_cards.sum
-  end
+  # def score
+
+  # end
 
 end

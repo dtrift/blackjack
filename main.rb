@@ -4,5 +4,5 @@ require_relative 'deck.rb'
 require_relative 'interface.rb'
 require_relative 'game.rb'
 
-game = Game.new
-game.start
+@game = Game.new
+@game.start

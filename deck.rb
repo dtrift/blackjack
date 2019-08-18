@@ -1,35 +1,17 @@
+require_relative 'card.rb'
+require_relative 'hand.rb'
+
 class Deck
+  attr_accessor :cards
 
   def initialize
-    @suits = ['♡', '♢', '♣', '♠' ]
-  end
-
-  def add_cards
     @cards = []
-
-    ('2'..'9').each do |value|
-      @suits.each do |suit|
-        card = value, suit
-        @cards << {card: card, value: value.to_i}
+    Card::SUITS.each do |suit|
+      Card::VALUES.each do |name, value|
+        @cards << Card.new(name, suit, value)
       end
     end
-
-    ['10', 'J', 'Q', 'K'].each do |value|
-      @suits.each do |suit|
-        card = value, suit
-        @cards << {card: card, value: 10}
-      end
-    end
-
-    ['A'].each do |value|
-      @suits.each do |suit|
-        card = value, suit
-        @cards << {card: card, value: 11}
-      end
-    end
-
     @cards.shuffle!
-
   end
 
   def first_card
@@ -38,5 +20,3 @@ class Deck
   end
 
 end
-
-@deck = Deck.new
