@@ -38,7 +38,7 @@ class Game
   end
 
   def show_player_cards
-    @interface.show_player_cards(@player)
+    @interface.show_player_cards(@player, interface_cards(@player))
   end
 
   def balance_info
@@ -46,7 +46,7 @@ class Game
   end
 
   def open_cards
-    @interface.open_cards(@player, @dealer)
+    @interface.open_cards(@player, @dealer, interface_cards(@player), interface_cards(@dealer))
     result
     one_more_game
   end
@@ -72,6 +72,14 @@ class Game
   end
 
   private
+
+  def interface_cards(gamer)
+    show_cards = []
+    gamer.hand.current_cards.each do |card|
+      show_cards << [card.name, card.suit].join
+    end
+    return show_cards
+  end
 
   def player_choice
     loop do

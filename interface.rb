@@ -51,9 +51,9 @@ class Interface
     puts '**************'
   end
 
-  def show_player_cards(player)
+  def show_player_cards(player, player_interface_cards)
     puts
-    puts "Карты #{player.name}: #{player.hand.show_cards.join(', ')}"
+    puts "Карты #{player.name}: #{player_interface_cards.join(', ')}"
     puts "Сумма: #{player.hand.score}"
     puts '-~-~-~-~-~-~-~-~-~-~-~-~-~-'
     puts 'Карты дилера: ************'
@@ -61,12 +61,12 @@ class Interface
     puts
   end
 
-  def open_cards(player, dealer)
+  def open_cards(player, dealer, player_interface_cards, dealer_interface_cards)
     puts
-    puts "Карты #{player.name}: #{player.hand.show_cards.join(', ')}"
+    puts "Карты #{player.name}: #{player_interface_cards.join(', ')}"
     puts "Сумма: #{player.hand.score}"
     puts '-~-~-~-~-~-~-~-~-~-~-~-~-~-'
-    puts "Карты дилера: #{dealer.hand.show_cards.join(', ')}"
+    puts "Карты дилера: #{dealer_interface_cards.join(', ')}"
     puts "Сумма: #{dealer.hand.score}"
     puts
   end

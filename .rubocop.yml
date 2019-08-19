@@ -20,7 +20,7 @@ Metrics/PerceivedComplexity:
   Max: 12
 
 Metrics/ClassLength:
-  Max: 118
+  Max: 125
 
 Lint/UselessAssignment:
   Enabled: false
