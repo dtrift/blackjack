@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 require_relative 'player.rb'
 require_relative 'dealer.rb'
 require_relative 'deck.rb'
 require_relative 'interface.rb'
-
 class Game
   attr_reader :player, :dealer, :interface, :deck, :bank
 
-  def initialize
+  def initialize(interface)
     @player = Player.new
     @dealer = Dealer.new
-    @interface = Interface.new
+    @interface = interface
     @bank = 0
   end
 
@@ -26,37 +27,14 @@ class Game
 
   def new_game
     @deck = Deck.new
-    @player.hand.clear
-    @dealer.hand.clear
+    @player.hand = Hand.new
+    @dealer.hand = Hand.new
     put_money_bank
     2.times { one_more_card(@player) }
     2.times { one_more_card(@dealer) }
     blackjack
     show_player_cards
-    loop do
-      case @interface.player_choice
-      when 1
-        skip
-        open_cards
-      when 2
-        one_more_card(@player)
-        skip
-        open_cards
-      when 3
-        open_cards
-      end
-    end
-  end
-
-  def one_more_game
-    loop do 
-      case @interface.one_more_game
-      when 1
-        new_game
-      when 2
-        gg
-      end
-    end
+    player_choice
   end
 
   def show_player_cards
@@ -85,8 +63,8 @@ class Game
 
   def draw
     @interface.draw
-    @player.money += @bank/2
-    @dealer.money += @bank/2
+    @player.money += @bank / 2
+    @dealer.money += @bank / 2
   end
 
   def gg
@@ -95,9 +73,36 @@ class Game
 
   private
 
+  def player_choice
+    loop do
+      case @interface.player_choice
+      when 1
+        skip
+        open_cards
+      when 2
+        one_more_card(@player)
+        skip
+        open_cards
+      when 3
+        open_cards
+      end
+    end
+  end
+
+  def one_more_game
+    loop do
+      case @interface.one_more_game
+      when 1
+        new_game
+      when 2
+        gg
+      end
+    end
+  end
+
   def blackjack
     if @player.hand.score == 21
-      @interface.blackjack 
+      @interface.blackjack
       player_win
       open_cards
       one_more_game
@@ -107,9 +112,9 @@ class Game
   def put_money_bank
     @bank = 0
     @player.money -= 10
-    player_lost && gg if @player.money < 0
+    player_lost && gg if @player.money.negative?
     @dealer.money -= 10
-    player_win && gg if @dealer.money < 0
+    player_win && gg if @dealer.money.negative?
     @bank += 20
     balance_info
   end
@@ -126,19 +131,15 @@ class Game
     if @player.hand.score < 22 && @dealer.hand.score < 22 &&
       @player.hand.score > @dealer.hand.score
       player_win
-    elsif 
-      @player.hand.score < 22 && @dealer.hand.score > 21 
+    elsif @player.hand.score < 22 && @dealer.hand.score > 21
       player_win
-    elsif
-      @player.hand.score < 22 && @dealer.hand.score < 22 &&
+    elsif @player.hand.score < 22 && @dealer.hand.score < 22 &&
       @player.hand.score < @dealer.hand.score
       player_lost
-    elsif
-      @player.hand.score > 21 && @dealer.hand.score < 22
+    elsif @player.hand.score > 21 && @dealer.hand.score < 22
       player_lost
     else
       draw
     end
   end
-
 end

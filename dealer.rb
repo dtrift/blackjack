@@ -1,12 +1,11 @@
-require_relative 'hand.rb'
+# frozen_string_literal: true
 
+require_relative 'hand.rb'
 class Dealer
-  attr_accessor :money
-  attr_reader :hand
+  attr_accessor :money, :hand
 
   def initialize(money = 100)
     @money = money
     @hand = Hand.new
   end
-
 end

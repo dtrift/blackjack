@@ -1,5 +1,6 @@
-require_relative 'card.rb'
+# frozen_string_literal: true
 
+require_relative 'card.rb'
 class Deck
   attr_accessor :cards
 
@@ -16,5 +17,4 @@ class Deck
   def first_card
     @cards.shift
   end
-
 end
