@@ -12,6 +12,9 @@ class Hand
   def get_card(card)
     @current_cards << card
     @show_cards << [card.name, card.suit].join
-    @score += card.value
+    if card.value == 11 && @score + card.value > 21
+      @score += 1
+    else @score += card.value
+    end
   end
 end
